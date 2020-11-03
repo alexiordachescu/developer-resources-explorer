@@ -6,6 +6,7 @@ import {
   selectDevelopersFavoritesResources,
   selectDevelopers,
 } from "./store/developers/selectors";
+import { selectLoggedinUser } from "./store/selectors";
 import { getAllResources } from "./store/resources/selectors";
 import ResourcesSection from "./components/ResourcesSection";
 import AddResourceForm from "./components/AddResourceForm";
@@ -20,7 +21,7 @@ const getStatistics = (state) => {
 function App() {
   const [favoriteId, setFavoriteId] = useState(2);
   const [developersId, setDevelopersId] = useState(1);
-
+  const greeting = useSelector(selectLoggedinUser);
   const resources = useSelector(getAllResources);
   const statistics = useSelector(getStatistics);
   const developers = useSelector(selectDevelopers);
@@ -33,7 +34,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Web resources</h1>
+      <h1>Welcome back, {greeting.name}</h1>
+      <h2>Web resources</h2>
       <div>Developers: {statistics.totalDevelopers}</div>
       <div>Resources: {statistics.totalResources}</div>
       <div>

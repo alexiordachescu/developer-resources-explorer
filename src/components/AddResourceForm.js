@@ -11,8 +11,8 @@ export default function AddResourceForm() {
 
   const submit = (event) => {
     event.preventDefault();
-
-    dispatch(addResource(name, type, tags.split(/[, ]+/), url));
+    const action = addResource(name, type, tags.split(/[, ]+/), url);
+    dispatch(action);
   };
 
   return (
