@@ -18,3 +18,9 @@ export const selectDeveloperStatistics = (state) => {
     ),
   };
 };
+
+export const selectDevelopersWithFavorite = (favoriteId) => {
+  return (state) => {
+    return state.developers.filter((dev) => dev.favorites.includes(favoriteId));
+  };
+};

@@ -1,6 +1,7 @@
 import "./App.css";
 import { useSelector } from "react-redux";
 import React, { useState } from "react";
+import { selectDevelopersWithFavorite } from "./store/developers/selectors";
 
 const getStatistics = (state) => {
   return {
@@ -18,9 +19,9 @@ function App() {
   const statistics = useSelector(getStatistics);
   const [favoriteId, setFavoriteId] = useState(2);
 
-  const developersWithThisFavorite = useSelector((state) => {
-    return state.developers.filter((dev) => dev.favorites.includes(favoriteId));
-  });
+  const developersWithThisFavorite = useSelector(
+    selectDevelopersWithFavorite(favoriteId)
+  );
 
   return (
     <div className="App">
