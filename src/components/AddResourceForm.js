@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { addResource } from "../store/resources/actions";
 
 export default function AddResourceForm() {
   const [name, setName] = useState("");
@@ -11,18 +12,9 @@ export default function AddResourceForm() {
   const submit = (event) => {
     event.preventDefault();
 
-    const addResource = {
-      type: "ADD_RESOURCE",
-      payload: {
-        id: Math.random(),
-        name: name,
-        type: type,
-        tags: tags.split(/[, ]+/),
-        url: url,
-      },
-    };
-    dispatch(addResource);
+    dispatch(addResource(name, type, tags.split(/[, ]+/), url));
   };
+
   return (
     <div>
       <form onSubmit={submit}>
