@@ -4,7 +4,11 @@ import React, { useState } from "react";
 import {
   selectDevelopersWithFavorite,
   selectDevelopersFavoritesResources,
+  selectDevelopers,
 } from "./store/developers/selectors";
+import { getAllResources } from "./store/resources/selectors";
+import ResourcesSection from "./components/ResourcesSection";
+import AddResourceForm from "./components/AddResourceForm";
 
 const getStatistics = (state) => {
   return {
@@ -13,20 +17,13 @@ const getStatistics = (state) => {
   };
 };
 
-const getResources = (state) => {
-  return state.resources;
-};
-
-const getDevelopers = (state) => {
-  return state.developers;
-};
-
 function App() {
-  const resources = useSelector(getResources);
-  const statistics = useSelector(getStatistics);
-  const developers = useSelector(getDevelopers);
   const [favoriteId, setFavoriteId] = useState(2);
   const [developersId, setDevelopersId] = useState(1);
+
+  const resources = useSelector(getAllResources);
+  const statistics = useSelector(getStatistics);
+  const developers = useSelector(selectDevelopers);
   const developersWithThisFavorite = useSelector(
     selectDevelopersWithFavorite(favoriteId)
   );
@@ -79,6 +76,10 @@ function App() {
             return <li key={resource.id}>{resource.name}</li>;
           })}
         </ul>
+      </div>
+      <div>
+        <ResourcesSection />
+        <AddResourceForm />
       </div>
     </div>
   );
