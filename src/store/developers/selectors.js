@@ -24,3 +24,15 @@ export const selectDevelopersWithFavorite = (favoriteId) => {
     return state.developers.filter((dev) => dev.favorites.includes(favoriteId));
   };
 };
+
+export const selectDevelopersFavoritesResources = (developersId) => {
+  return (state) => {
+    const developer = state.developers.find((dev) => developersId === dev.id);
+    if (!developer) {
+      return [];
+    }
+    return state.resources.filter((resource) =>
+      developer.favorites.includes(resource.id)
+    );
+  };
+};
